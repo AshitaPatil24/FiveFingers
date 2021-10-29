@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-12 mt-2">
+                        <img src="{% static 'aasets/images/logo1a.png' %}" height="120px" width="150px" alt="">
+                    </div>
+                    <div class="col-lg-8 col-md-12 mt-5">
+                        <!-- <h1><b>FIVE FINGERS EDUCATION PVT LTD</b></h1> -->
+                        <img src="{% static 'aasets/images/logo2.png' %}" height="30px" width="650px" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/about/">About Us</a></li>
+                    <li><a href="">Books</a></li>
+                    <li><a href="/webindex/">Register</a></li>
+                    <li><a href="/webindex/">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section>
+        <div class="container">
+            <div class="main p-2 ">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" style="text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                    </ol>
+                </nav>
+                <h2 class="text-dark">Contact Us</h2>
+                <div class="img">
+                    <img src="{% static 'aasets/images/Contact-Us (1).png' %}" width="100%" height="350px" alt="">
+                </div>
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col-lg-6 left-col">
+                            <label for=""><b>Address:</b></label><br>
+                            <p>Regd. Off.: 25/4, Gali No. 17, Vishwas Nagar, Delhi-110032</p><br>
+                            <label for=""><b>Sales Office:</b> 3/1/10, Site-IV, Sahibabad Indl. Area, Ghaziabad
+                                (U.P.),</label><br>
+                            <p><b>PIN:</b>201010</p><br>
+                            <label for=""><b>Phone:</b> (0120) 4152032, 4152033, 4152034,</label><br><br>
+                            <label for=""><b>Fax:</b>(0120) 4115692</label><br><br>
+                            <label for=""><b>Email</b></label>
+                            <p>info@fivefingers.com, sales@fivefingers.com</p><br>
+                            <p>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4457.719282269597!2d79.12070070754245!3d21.131990243120065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4bf7a55555549%3A0xf90c9d9379e94a54!2sMIT%20Software%20and%20Stock%20Wealth%20Advisory%20Services!5e0!3m2!1sen!2sin!4v1633974681067!5m2!1sen!2sin"
+                                    width="500" height="400" style="border:0;" allowfullscreen=""
+                                    loading="lazy"></iframe>
+                            </p>
+                        </div>
+                        <div class="col-lg-6 ml-auto right-col">
+                            <h5><b>Contact Form</b></h5>
+                            <form action="">
+                                <label for=""><b>First name:</b></label><br>
+                                <input type="text" style="width:400px;"><br><br>
+                                <label for=""><b>Email:</b></label><br>
+                                <input type="email" style="width:400px;"><br><br>
+                                <label for=""><b>Phone:</b></label><br>
+                                <input type="number" style="width:400px;"><br><br>
+                                <label for=""><b>Enquiry:</b></label><br>
+                                <textarea name="" id="" cols="50" rows="10"></textarea><br><br>
+                                <label for=""><b>Enter the Code in the box below:</b></label><br>
+                                <input type="text" style="width:200px;"><br><br>
+                                <button type="Submit" id="btn">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <h4 class="text-center">CONTACT <span class="text-info">INFO</span></h4>
+        <p class="text-center">Phone : / Fax No : / Email : info@fivefingers.com / support@fivefingers.com</p>
+    </section>
+    <footer class="bg-dark">
+        <div class="container ">
+            <p>2016 © Five Fingers Education(P) Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="" async defer></script>
+</body>
+
+</html>

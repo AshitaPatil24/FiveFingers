@@ -1,0 +1,44 @@
+//templates/edit.html
+{% extends "base.html" %}
+
+{% block title %}Add New Employee Records{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <h4>Django CRUD (Create Read Update Delete) Example - Bootstrap Datatable</h4>
+ <form method="POST" class="post-form" action="/updateeditprofile/updateeditprofile/{{employee.id}}">
+   {% csrf_token %}
+  <div class="container">
+ <br>
+  <div class="form-group row">
+  <label class="col-sm-1 col-form-label"></label>
+  <div class="col-sm-4">
+  <h3>Update Details</h3>
+  </div>
+   </div>
+<!--   <div class="form-group row">-->
+<!--  <label class="col-sm-2 col-form-label">Uname:</label>-->
+<!--  <div class="col-sm-4">-->
+<!--   <input type="text" class="form-control" name="uname" id="uname" required maxlength="100" value="{{ employee.uname }}" />-->
+<!--  </div>-->
+<!--   </div>-->
+
+        <div class="form-group row">
+  <label class="col-sm-2 col-form-label">Umobilenumber:</label>
+  <div class="col-sm-4">
+   <input type="text" class="form-control" name="mobile" id="umobilenumber" required maxlength="100" value="{{ employee.mobile }}" />
+  </div>
+   </div>
+
+
+
+  <button type="submit" class="btn btn-success btn-lg">Update</button>
+  </div>
+  </div>
+  </div>
+ </form>
+{% endblock content %}
+
+
+
+

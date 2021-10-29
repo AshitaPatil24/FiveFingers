@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/webs-3.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </label>
+        <label for="" class="logo">Five Fingers Education</label>
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="/about/">About Us</a></li>
+            <li><a href="/contact/">Contact US</a></li>
+            <li><a href="/weblogout/">Logout</a></li>
+        </ul>
+    </nav>
+    <section id="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>DOWNLOAD <span class="text-info">SECTION</span></h5>
+                </div>
+                <div class="col-md-3 ml-auto">
+                    {% for pdf in viewbook %}
+                    <a href="{{ pdf.viewbook.url}}"  class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i> view book</a>
+                    {% endfor %}
+
+<!--                    {% if viewbooks %}-->
+<!--                    <a href="{{viewbooks.viewbook}}" download="/{{viewbooks.viewbook}}" class="btn btn-info">-->
+<!--                        <i class="fa fa-download" aria-hidden="true"></i> view book</a>-->
+<!--                    {% endif %}-->
+
+                </div>
+            </div>
+            <form method="get" action="/downloadsection/" id="indexForm" data-courses-url="{% url 'ajax_load_courses' %}">
+                {% csrf_token %}
+            <div class="sel-box bg-light col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+
+                         <select id="subject" name="subject_id" class="form-control ml-2   float-left"
+                                        style="width:200px;" required>
+                                        <option value="">Select Subject</option>
+                                            {% for i in subject %}
+                                            <option value="{{i.id}}">{{i.name}}</option>
+                                            {% endfor %}
+                                    </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="bookseries" id="bookseries" class="form-control mr-4" required >
+
+<!--                            <option value="">Select Series</option>-->
+<!--                                {% for i in bookseries %}-->
+<!--                                    <option value="{{i.id}}">{{i.name}}</option>-->
+<!--                                {% endfor %}-->
+
+                        </select>
+<!--                        <select name="bookseries" id="bookseries" class="form-control mr-4" required></select>-->
+                    </div>
+                    <div class="col-md-3">
+
+                        <select id="classid" name="classid_id" class="form-control ml-2 cls"
+                                        style="width:200px;" required>
+                                        <option value="">Select Class</option>
+                                        {% for i in classid %}
+                                        <option value="{{i.id}}">{{i.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                    </div>
+                    <div class="col-md-3">
+<!--                        <a href="" type="submit" class="btn btn-info mt-3">Search</a>-->
+                        <input type="submit" value="Search" class="btn btn-info mt-3">
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <div id="tab-pane">
+                <div class="row">
+                    <div class="col-md-5 p-3" id="left-col"
+                        style="box-shadow:2px 4px 10px rgba(0,0,0,0.5); max-height:270px;">
+                        <h3 class="text-info">Complete Download</h3>
+                        <div class="box-1 mt-4">
+                            <ul class="nav nav-tabs" id="mytab">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#solutions">Solutions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#lesson">Lesson Plan</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content py-3" id="mytabcontent">
+                                <div class="tab-pane p-2 fade show active bg-info" id="solutions"
+                                    style="box-shadow:2px 4px 10px rgba(0,0,0,0.3);border-radius:8px;">
+                                    <div class="row">
+                                        <h4 class="col-md-5 text-white">Solutions</h4>
+<!--                                        <a href="" class="ml-auto mr-4 text-white" style="font-size:25px;"><i-->
+<!--                                                class="fa fa-download ml-auto" aria-hidden="true"></i></a>-->
+                                         {% for pdf in solution %}
+
+                                            <a href="{{ pdf.solution.url}}" download="{{ pdf.solution.url}}" class="ml-auto mr-4 text-white" style="font-size:25px;"><i class="fa fa-download ml-auto" aria-hidden="true"></i></a>
+
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="tab-pane p-2  fade bg-info" id="lesson"
+                                    style="box-shadow:2px 4px 10px rgba(0,0,0,0.3); border-radius:8px;">
+                                    <div class="row">
+                                        <h4 class="col-md-5 text-white">Lesson Plan</h4>
+<!--                                        <a href="" class="ml-auto mr-4 text-white" style="font-size:25px;"><i-->
+<!--                                                class="fa fa-download ml-auto" aria-hidden="true"></i></a>-->
+                                        {% for pdf in lesson %}
+
+                                            <a href="{{ pdf.lesson.url}}" download="{{ pdf.lesson.url}}" class="ml-auto mr-4 text-white" style="font-size:25px;"><i class="fa fa-download ml-auto" aria-hidden="true"></i></a>
+
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ml-auto p-3" style="box-shadow:2px 4px 10px rgba(0,0,0,0.5);">
+                        <h3 class="mb-4 text-info">Chapter Wise Download</h3>
+                        <select id="chapter_id" name="chapter_id" class="form-control">
+                            <option value="10">Chapter-1</option>
+                            <option value="11">Chapter-2</option>
+                            <option value="12">Chapter-3</option>
+                            <option value="13">Chapter-4</option>
+                            <option value="14">Chapter-5</option>
+                            <option value="15">Chapter-6</option>
+                            <option value="16">Chapter-7</option>
+                            <option value="23">Chapter-8</option>
+                            <option value="24">Chapter-9</option>
+                            <option value="25">Chapter-10</option>
+                            <option value="26">Chapter-11</option>
+                            <option value="27">Chapter-12</option>
+                            <option value="28">Chapter-13</option>
+                            <option value="29">Chapter-14</option>
+                            <option value="30">Chapter-15</option>
+                            <option value="31">Chapter-16</option>
+                            <option value="32">Chapter-17</option>
+                            <option value="33">Chapter-18</option>
+                            <option value="34">Chapter-19</option>
+                        </select>
+                        <div class="box-1 mt-4">
+                            <ul class="nav nav-tabs" id="mytab">
+                                <li class="nav-item">
+                                    <a class="nav-link active bg-info text-white" data-toggle="tab"
+                                        href="#solutions">Solutions</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content py-3" id="mytabcontent">
+                                <div class="tab-pane p-2  fade show active bg-info" id="solutions"
+                                    style="box-shadow:2px 4px 10px rgba(0,0,0,0.3);border-radius:8px;">
+                                    <div class="row">
+                                        <h4 class="col-md-5 text-white">Worksheet 1</h4>
+                                        <a href="" class="ml-auto mr-4 text-white" style="font-size:25px;"><i
+                                                class="fa fa-download ml-auto" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                                <div class="tab-pane p-2  fade show active mt-4 bg-info" id="solutions"
+                                    style="box-shadow:2px 4px 10px rgba(0,0,0,0.3);border-radius:8px;">
+                                    <div class="row">
+                                        <h4 class="col-md-5 text-white">Worksheet 2</h4>
+                                        <a href="" class="ml-auto mr-4 text-white" style="font-size:25px;"><i
+                                                class="fa fa-download ml-auto" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section id="img">
+        <h1 class="text-white text-center">E-BOOKS AVAILABLE</h1>
+        <div class="container">
+            <ul class="ml-5">
+                <li><img src="{% static 'aasets/images/books/Cover1.jpg' %}" style="width:230px;height:277px; border:4px solid white;"
+                        alt=""></li>
+                <li><img src="{% static 'aasets/images/books/Cover2.jpg' %}" style="width:230px;height:277px; border:4px solid white;"
+                        alt=""></li>
+                <li><img src="{% static 'aasets/images/books/Cover3.jpg' %}" style="width:230px;height:277px; border:4px solid white;"
+                        alt=""></li>
+                <li><img src="{% static 'aasets/images/books/Cover4.jpg' %}" style="width:230px;height:277px; border:4px solid white;"
+                        alt=""></li>
+            </ul>
+        </div>
+    </section>
+    <section id="contact">
+        <h4 class="text-center">CONTACT <span class="text-info">INFO</span></h4>
+        <p class="text-center">Phone : / Fax No : / Email : info@fivefingers.com / support@fivefingers.com</p>
+    </section>
+    <footer class="bg-dark">
+        <div class="container ">
+            <p>2016 © Five Fingers Education(P) Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="" async defer></script>
+ <script>
+    $("#subject").change(function () {
+      var url = $("#indexForm").attr("data-courses-url");  // get the url of the `load_courses` view
+      var subjectId = $(this).val();  // get the selected programming ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/load-courses/)
+        data: {
+          'subject': subjectId       // add the programming id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_courses` view function
+          $("#bookseries").html(data);  // replace the contents of the course input with the data that came from the server
+        }
+      });
+
+    });
+
+  </script>
+</body>
+
+</html>

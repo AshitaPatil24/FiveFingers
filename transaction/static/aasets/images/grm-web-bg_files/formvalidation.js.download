@@ -1,0 +1,1274 @@
+var l = window.location;
+
+var baseurl = l.protocol + "//" + l.host;
+
+
+
+(function (c, a, d) {
+
+
+
+	var b = {};
+
+
+
+	b.UTIL = {
+
+
+
+		setupValidation: function () {
+
+
+
+			c("#signupform").validate({
+
+
+
+				rules: {
+
+					name: {
+						required: true
+					},
+
+					email: {
+						required: true,
+						email: true
+					},
+					password: {
+						required: true
+
+					},
+					schoolname: {
+						required: true
+					},
+					board_id: {
+						required: true
+					},
+					subject_id: {
+						required: true
+					},
+					series_id: {
+						required: true
+					},
+					mobile: {
+						required: true
+					},
+					dob: {
+						required: true
+					}
+				},
+				errorPlacement: function(error, element) { 
+				  error.appendTo( element.parent("td").next("td") );
+				},
+				submitHandler: function (form)
+				{
+					 c.ajax({
+						url: baseurl+"/aedusers.php?type=add",
+						type: "post",
+						data: $("#signupform").serialize(),
+						dataType: "json",
+						beforeSend: function () {
+							c("#signup").attr("disabled", true);
+							c("#signup").after('<span class="wait">&nbsp;<img src="'+baseurl+'/images/loading.gif" alt="" /></span>')
+						},
+						complete: function () {
+							c("#signup").attr("disabled", false);
+							c(".wait").remove()
+						},
+						success: function (f) {
+							if (f.redirect) {
+								location = f.redirect
+							} else {
+								if (f.error) {
+									c("#signuperror").empty();
+									c("#signuperror").prepend(f.error);
+								}
+							}
+						},
+						error: function (h, f, g) {
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+						}
+					})
+				}
+			});
+			
+
+			c("#signinform").validate({
+				rules: {
+					email: {
+						required: true,
+						email: true
+					},
+					password: {
+						required: true
+					}
+				},
+				errorPlacement: function(error, element) { 
+				  error.appendTo( element.parent("td").next("td") );
+				},
+				submitHandler: function (form)
+
+				{
+					 c.ajax({
+						url: baseurl+"/aedusers.php?type=login",
+						type: "post",
+						data: $("#signinform").serialize(),
+						dataType: "json",
+						beforeSend: function () {
+							c("#login").attr("disabled", true);
+							c("#login").after('<span class="wait">&nbsp;<img src="'+baseurl+'/images/loading.gif" alt="" /></span>')
+						},
+						complete: function () {
+							c("#login").attr("disabled", false);
+							c(".wait").remove()
+						},
+						success: function (f) {
+							if (f.redirect) {
+								location = f.redirect
+							} else {
+								if (f.error) {
+									c("#loginerror").empty();
+									c("#loginerror").prepend(f.error);
+								}
+								else if (f.error1) {
+									c("#loginerror").empty();
+									c("#loginerror").prepend(f.error);
+								}
+							}
+						},
+						error: function (h, f, g) {
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+						}
+
+
+
+					})
+
+
+
+				}
+
+
+
+			});
+
+			
+
+			
+
+			
+
+			
+
+
+
+			c("#resetpassword").validate({
+
+
+
+				rules: {
+
+
+
+					email: {
+
+
+
+						required: true,
+
+
+
+						email: true
+
+
+
+					}
+
+
+
+				},
+
+
+
+				submitHandler: function (form)
+
+
+
+				{
+
+
+
+					  c.ajax({
+
+
+
+						url: baseurl+"/aedusers.php?type=resetlink",
+
+
+
+						type: "post",
+
+
+
+						data: c("#resetpassword :input"),
+
+
+
+						dataType: "json",
+
+
+
+						beforeSend: function () {
+
+
+
+							c("#resetlink").attr("disabled", true);
+
+
+
+							c("#resetlink").after('<span class="wait">&nbsp;<img src="'+baseurl+'/images/loading.gif" alt="" /></span>')
+
+
+
+						},
+
+
+
+						complete: function () {
+
+
+
+							c("#resetlink").attr("disabled", false);
+
+
+
+							c(".wait").remove()
+
+
+
+						},
+
+
+
+						success: function (f) {
+
+
+
+							if (f.redirect) {
+
+
+
+								location = f.redirect
+
+
+
+							} else {
+
+
+
+								if (f.error) {
+
+
+
+									c("#resetlinkerror").empty();
+
+
+
+									c("#resetlinkerror").prepend(f.error);
+
+
+
+								}
+
+
+
+							}
+
+
+
+						},
+
+
+
+						error: function (h, f, g) {
+
+
+
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+
+
+
+						}
+
+
+
+					})
+
+
+
+				}
+
+
+
+			});
+
+			
+
+			c("#changepassword").validate({
+
+
+
+				rules: {
+
+
+
+					newpasspwrd: {
+
+
+
+						required: true
+
+
+
+					},
+
+
+
+					confirmpasspwrd: {
+
+
+
+						required: true,
+
+
+
+						equalTo: "#newpasspwrd"
+
+
+
+					}
+
+
+
+				},
+
+
+
+				 submitHandler: function(form) {
+
+
+
+					  c.ajax({
+
+
+
+						url: baseurl+"/aedusers.php?type=changepassword",
+
+
+
+						type: "post",
+
+
+
+						data: c("#changepassword :input"),
+
+
+
+						dataType: "json",
+
+
+
+						beforeSend: function () {
+
+
+
+							c("#changepasswordbtn").attr("disabled", true);
+
+
+
+							c("#changepasswordbtn").after('<span class="wait">&nbsp;<img src="/images/loading.gif" alt="" /></span>')
+
+
+
+						},
+
+
+
+						complete: function () {
+
+
+
+							c("#changepasswordbtn").attr("disabled", false);
+
+
+
+							c(".wait").remove()
+
+
+
+						},
+
+
+
+						success: function (f) {
+
+
+
+							if (f.redirect) {
+
+
+
+								location = f.redirect
+
+
+
+							} else {
+
+
+
+								if (f.error) {
+
+
+
+									$('#changepassword input[type="text"]').val('');
+									c("#changepassworderror").prepend(f.error);
+
+
+
+								}
+
+
+
+							}
+
+
+
+						},
+
+
+
+						error: function (h, f, g) {
+
+
+
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+
+
+
+						}
+
+
+
+					})
+
+
+
+				}
+
+			});
+
+			
+			
+			
+			
+			
+			
+			c("#editprofile").validate({
+
+				rules: {
+
+					name: {
+						required: true
+					},
+
+					mobile: {
+						required: true
+					}
+
+				},
+
+				 submitHandler: function(form) {
+
+
+
+					  c.ajax({
+
+
+
+						url: baseurl+"/aedusers.php?type=editprofile",
+
+
+
+						type: "post",
+
+
+
+						data: c("#editprofile :input"),
+
+
+
+						dataType: "json",
+
+
+
+						beforeSend: function () {
+
+
+
+							c("#editprofilebtn").attr("disabled", true);
+
+
+
+							c("#editprofilebtn").after('<span class="wait">&nbsp;<img src="/images/loading.gif" alt="" /></span>')
+
+
+
+						},
+
+
+
+						complete: function () {
+
+
+
+							c("#editprofilebtn").attr("disabled", false);
+
+
+
+							c(".wait").remove()
+
+
+
+						},
+
+
+
+						success: function (f) {
+
+
+
+							if (f.redirect) {
+
+
+
+								location = f.redirect
+
+
+
+							} else {
+
+
+
+								if (f.error) {
+
+
+
+									$('#editprofile input[type="text"]').val('');
+									c("#editprofileerror").prepend(f.error);
+
+
+
+								}
+
+
+
+							}
+
+
+
+						},
+
+
+
+						error: function (h, f, g) {
+
+
+
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+
+
+
+						}
+
+
+
+					})
+
+
+
+				}
+
+			});
+			
+
+			c("#form-review").validate({
+
+				rules: {
+
+					text: {
+						required: true
+					}
+				},
+				errorPlacement: function(error, element) { 
+				  error.appendTo( element.parent("td").next("td") );
+				},
+				submitHandler: function (form)
+				{
+					 c.ajax({
+						url: baseurl+"/aedusers.php?type=addreview",
+						type: "post",
+						data: $("#form-review").serialize(),
+						dataType: "json",
+						beforeSend: function () {
+							c("#button-review").attr("disabled", true);
+							c("#button-review").after('<span class="wait">&nbsp;<img src="'+baseurl+'/images/loading.gif" alt="" /></span>')
+						},
+						complete: function () {
+							c("#button-review").attr("disabled", false);
+							c(".wait").remove()
+						},
+						success: function (f) {
+							if (f.redirect) {
+								location = f.redirect
+							} else {
+								if (f.error) {
+									c("#reviewerror").empty();
+									c("#reviewerror").prepend(f.error);
+								}
+							}
+						},
+						error: function (h, f, g) {
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+						}
+					})
+				}
+			});
+
+
+
+			c("#form-suggestion").validate({
+
+				rules: {
+
+					text: {
+						required: true
+					}
+				},
+				errorPlacement: function(error, element) { 
+				  error.appendTo( element.parent("td").next("td") );
+				},
+				submitHandler: function (form)
+				{
+					 c.ajax({
+						url: baseurl+"/aedusers.php?type=addsuggestion",
+						type: "post",
+						data: $("#form-suggestion").serialize(),
+						dataType: "json",
+						beforeSend: function () {
+							c("#button-suggestion").attr("disabled", true);
+							c("#button-suggestion").after('<span class="wait">&nbsp;<img src="'+baseurl+'/images/loading.gif" alt="" /></span>')
+						},
+						complete: function () {
+							c("#button-suggestion").attr("disabled", false);
+							c(".wait").remove()
+						},
+						success: function (f) {
+							if (f.redirect) {
+								location = f.redirect
+							} else {
+								if (f.error) {
+									c("#suggestionerror").empty();
+									c("#suggestionerror").prepend(f.error);
+								}
+							}
+						},
+						error: function (h, f, g) {
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+						}
+					})
+				}
+			});
+			
+			
+
+			c("#newsletterform").validate({
+
+
+
+				rules: {
+
+
+
+					newsemail: {
+
+
+
+						required: true,
+
+
+
+						email: true
+
+
+
+					}
+
+
+
+				},
+
+
+
+				submitHandler: function (form)
+
+
+
+				{
+
+
+
+					 c.ajax({
+
+
+
+						url: baseurl+"/newsletterdb.php",
+
+
+
+						type: "post",
+
+
+
+						data: c(".newsletter :input,select"),
+
+
+
+						dataType: "json",
+
+
+
+						beforeSend: function () {
+
+
+
+							c("#newsletterbtn").attr("disabled", true);
+
+
+
+							c("#newsletterbtn").after('<span class="wait">&nbsp;<img src="/images/loading.gif" alt="" /></span>')
+
+
+
+						},
+
+
+
+						complete: function () {
+
+
+
+							c("#newsletterbtn").attr("disabled", false);
+
+
+
+							c(".wait").remove()
+
+
+
+						},
+
+
+
+						success: function (f) {
+
+
+
+
+
+								if (f.error) {
+
+
+
+									alert(f.error);
+
+									$('#newsemail').val('');
+
+									
+
+
+
+								}
+
+
+
+						},
+
+	
+
+						error: function (h, f, g) {
+
+
+
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+
+
+
+						}
+
+
+
+					})
+
+
+
+				}
+
+
+
+			});
+
+			
+
+			
+
+			
+
+			c("#addcomment").validate({
+
+
+
+				rules: {
+
+
+
+					postcomment: {
+
+
+
+						required: true,
+
+						minlength: 20
+
+
+
+					}
+
+
+
+				},
+
+
+
+				submitHandler: function (form)
+
+
+
+				{
+
+
+
+					 c.ajax({
+
+
+
+						url: baseurl+"/aedusers.php?type=addcomment",
+
+
+
+						type: "post",
+
+
+
+						data: c(".comment :input,select,textarea"),
+
+
+
+						dataType: "json",
+
+
+
+						beforeSend: function () {
+
+
+
+							c("#postcomment").attr("disabled", true);
+
+
+
+							c("#postcomment").after('<span class="wait">&nbsp;<img src="'+baseurl+'/images/loading.gif" alt="" /></span>')
+
+
+
+						},
+
+
+
+						complete: function () {
+
+
+
+							c("#addcomment").attr("disabled", false);
+
+
+
+							c(".wait").remove()
+
+
+
+						},
+
+
+
+						success: function (f) {
+
+
+
+
+
+								if (f.error) {
+
+
+
+									alert(f.error);
+
+									$('#postcomment').val('');
+
+									
+
+
+
+								}
+
+
+
+						},
+
+	
+
+						error: function (h, f, g) {
+
+
+
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+
+
+
+						}
+
+
+
+					})
+
+
+
+				}
+
+
+
+			});
+			
+			
+			
+			
+			c("#sendenquiryform").validate({
+
+
+
+				rules: {
+
+					email: {
+						required: true,
+						email: true
+					},
+					mobile: {
+						required: true,
+						number: true,
+						minlength: 10
+					},
+					message: {
+						required: true
+					}
+
+
+
+				},
+
+
+
+				submitHandler: function (form)
+
+
+
+				{
+
+
+
+					 c.ajax({
+
+
+
+						url: baseurl+"/aedusers.php?type=sendenquiry",
+
+
+
+						type: "post",
+
+
+
+						data: c(".penquirycontainer :input,select,textarea"),
+
+
+
+						dataType: "json",
+
+
+
+						beforeSend: function () {
+
+
+
+							c("#sendenquiry").attr("disabled", true);
+
+
+
+							c("#sendenquiry").after('<span class="wait">&nbsp;<img src="'+baseurl+'/images/loading.gif" alt="" /></span>')
+
+
+
+						},
+
+
+
+						complete: function () {
+
+
+
+							c("#sendenquiry").attr("disabled", false);
+
+
+
+							c(".wait").remove()
+
+
+
+						},
+
+
+
+						success: function (f) {
+
+
+
+								if (f.error) {
+
+
+
+									alert(f.error);
+
+									window.location.reload();
+
+									
+
+
+
+								}
+
+
+
+						},
+
+	
+
+						error: function (h, f, g) {
+
+
+
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+
+
+
+						}
+
+
+
+					})
+
+
+
+				}
+
+
+
+			});
+			
+			
+			c("#contactform").validate({
+
+
+
+				rules: {
+
+					name: {
+						required: true
+					},
+					email: {
+						required: true,
+						email: true
+					},
+					mobile: {
+						required: true,
+						number: true,
+						minlength: 10
+					},
+					message: {
+						required: true
+					}
+
+
+
+				},
+
+
+
+				submitHandler: function (form)
+
+
+
+				{
+
+
+
+					 c.ajax({
+
+
+
+						url: baseurl+"/aedusers.php?type=sendcontactenquiry",
+
+
+
+						type: "post",
+
+
+
+						data: c(".enquirycontainer :input,select,textarea"),
+
+
+
+						dataType: "json",
+
+
+
+						beforeSend: function () {
+
+
+
+							c("#contactsend").attr("disabled", true);
+
+
+
+							c("#contactsend").after('<span class="wait">&nbsp;<img src="'+baseurl+'/images/loading.gif" alt="" /></span>')
+
+
+
+						},
+
+
+
+						complete: function () {
+
+
+
+							c("#contactsend").attr("disabled", false);
+
+
+
+							c(".wait").remove()
+
+
+
+						},
+
+
+
+						success: function (f) {
+
+
+
+								if (f.error) {
+
+
+
+									alert(f.error);
+
+									window.location.reload();
+
+									
+
+
+
+								}
+
+
+
+						},
+
+	
+
+						error: function (h, f, g) {
+
+
+
+							alert(g + "\r\n" + h.statusText + "\r\n" + h.responseText)
+
+
+
+						}
+
+
+
+					})
+
+
+
+				}
+
+
+
+			});
+
+			
+
+			
+
+			
+
+
+
+		}
+
+
+
+	};
+
+	
+
+	
+
+
+
+	c(d).ready(function (e) {
+
+
+
+		b.UTIL.setupValidation()
+
+
+
+	})
+
+
+
+})(jQuery, window, document);
+
+
+

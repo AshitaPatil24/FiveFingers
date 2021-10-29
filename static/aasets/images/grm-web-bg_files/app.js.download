@@ -1,0 +1,111 @@
+
+var App = function() {
+
+    // IE mode
+    var isRTL = false;
+    var isIE9 = false;
+    var isIE10 = false;
+    var isIE = false;
+
+    var resizeHandlers = [];
+
+
+   
+
+
+
+
+
+
+
+    
+
+
+    return {
+
+        //main function to initiate the theme
+        init: function() {
+            //IMPORTANT!!!: Do not modify the core handlers call order.
+
+            //Core handlers
+            handleHeight();
+            this.addResizeHandler(handleHeight); // handle auto calculating height on window resize
+
+            handleInit(); // initialize core variables
+            handleOnResize(); // set and handle responsive    
+
+            //UI Component handlers            
+            //handleAnimate(); // handle animate
+            handleCheckboxRadios() // handle checkbox & radios
+            handleAlerts(); //handle closabled alerts
+            handleDropdowns(); // handle dropdowns
+            handleTabs(); // handle tabs
+            handleTooltips(); // handle bootstrap tooltips
+            handlePopovers(); // handles bootstrap popovers
+            handleAccordions(); //handles accordions 
+            handleModals(); // handle modals
+
+            // Hacks
+            handleFixInputPlaceholderForIE(); //IE9 & IE10 input placeholder issue fix
+        },
+
+ 
+
+        //public function to initialize the fancybox plugin
+        initFancybox: function() {},
+
+        //public helper function to get actual input value(used in IE9 and IE8 due to placeholder attribute not supported)
+        getActualVal: function(el) {},
+
+        //public function to get a paremeter by name from URL
+        getURLParameter: function(paramName) {},
+
+        // check for device touch support
+        isTouchDevice: function() {},
+
+        // To get the correct viewport width based on  http://andylangton.co.uk/articles/javascript/get-viewport-size-javascript/
+        getViewPort: function() {
+            var e = window,
+                a = 'inner';
+            if (!('innerWidth' in window)) {
+                a = 'client';
+                e = document.documentElement || document.body;
+            }
+
+            return {
+                width: e[a + 'Width'],
+                height: e[a + 'Height']
+            };
+        },
+
+        // generate unique ID
+        getUniqueID: function(prefix) {
+            return 'prefix_' + Math.floor(Math.random() * (new Date()).getTime());
+        },
+
+       
+
+       
+
+        // responsive breakpoints
+        getBreakpoint: function(size) {}
+    };
+
+}();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <title>Toggle Menu</title>
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i class="fa fa-bars" aria-hidden="true" id="btn"></i>
+        <i class="fa fa-times" aria-hidden="true" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+        <header>My App</header>
+        <ul>
+            <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;"></i>My Account</a>
+            </li>
+            <li><a href="/editprofile/"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;"></i> Edit My Profile</a></li>
+            <li><a href="/changepass/"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;"></i> Change Password</a>
+            </li>
+            <li><a href="/addreview/"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;"></i> Add Review</a>
+            </li>
+            <li><a href="/addsuggestion/"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;"></i> Add Suggestion</a>
+            </li>
+<!--            <li class="nav-item dropdown"><a href="" class="nav-link dropdown-toggle text-white"-->
+<!--                            data-toggle="dropdown"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;"></i>Links</a>-->
+<!--                        <div class="dropdown-menu">-->
+<!--                            <a href="/searchsubject/" class="dropdown-item" style="color:black" >Subject</a>-->
+<!--                            <a href="/searchbookseries/" class="dropdown-item" style="color:black">Book Series</a>-->
+<!--                            <a href="/searchclass/" class="dropdown-item" style="color:black">Class</a>-->
+<!--                            <a href="/searchchapter/" class="dropdown-item" style="color:black">Chapter</a>-->
+<!--                            <a href="/searchpdf/" class="dropdown-item" style="color:black">Viewbook</a>-->
+<!--                            <a href="/searchsolution/" class="dropdown-item" style="color:black">Solution</a>-->
+<!--                            <a href="/searchlesson" class="dropdown-item" style="color:black">Lesson</a>-->
+<!--                            <a href="/searchworksheet" class="dropdown-item" style="color:black">Worksheet</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+            <li><a href="/weblogout/"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:20px;"></i> Logout</a></li>
+        </ul>
+    </div>
+    <div class="container" style="margin:80px 0 0 270px;">
+         <section id="hero">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h2>DOWNLOAD <span class="text-info">SECTION</span></h2>
+                </div>
+                <div class="col-md-3 ml-auto">
+                    {% for pdf in viewbook %}
+                    <a href="{{ pdf.viewbook.url}}" class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i>view book</a>
+                    {% endfor %}
+
+<!--                    {% for pdf in viewbook %}-->
+<!--                    <a href="{{ pdf.viewbook.url}}" download="{{ pdf.viewbook.url}}" class="btn btn-info text-white" ><i class="fa fa-download" aria-hidden="true"></i>Download</a>-->
+<!--                    {% endfor %}-->
+
+                </div>
+            </div>
+            <form method="GET"  action="/webdownload/" id="indexForm" data-courses-url="{% url 'ajax_load_courses' %}">
+
+            <div class="sel-box">
+                <div class="search-box bg-light mb-5 pb-3 pl-3" >
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <select id="subject" name="subject_id" class="form-control mt-3"  required>
+                            <option value="">Select Subject</option>
+                                {% for i in subject %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                                {% endfor %}
+                        </select>
+
+                        </div>
+                        <div class="col-md-3">
+                        <select name="bookseries" id="bookseries" class="form-control mt-3 " required></select>
+
+                        </div>
+                        <div class="col-md-3">
+                            <select id="classid" name="classid_id" class="form-control mt-3 " required>
+                            <option value="">Select Class</option>
+                            {% for i in classidall %}
+                            <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="submit" value="Search" class="btn btn-info mt-3" style="width:150px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <div id="tab-pane">
+                <div class="row">
+                    <div class="col-md-5 p-3" id="left-col"
+                        style="box-shadow:2px 4px 10px rgba(0,0,0,0.5); max-height:270px;">
+                        <h3 class="text-info">Complete Download</h3>
+                        <div class="box-1 mt-4">
+                            <ul class="nav nav-tabs" id="mytab">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#solutions">Solutions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#lesson">Lesson Plan</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content py-3" id="mytabcontent">
+                                <div class="tab-pane p-2 fade show active bg-info" id="solutions"
+                                    style="box-shadow:2px 4px 10px rgba(0,0,0,0.3);border-radius:8px;">
+                                    <div class="row">
+                                        <h4 class="col-md-5 text-white">Solutions</h4>
+                                        {% for pdf in solution %}
+                                        <a href="{{ pdf.solution.url}}" class="ml-auto mr-3 text-white" style="font-size:25px;text-decoration: none;"><i
+                                                class="fa fa-eye ml-auto" aria-hidden="true"></i></a>
+                                        {% endfor %}
+                                        {% for pdf in solution %}
+                                        <a href="{{ pdf.solution.url}}" download="{{ pdf.solution.url}}" class="mr-4 text-white" style="font-size:25px;text-decoration: none;"><i
+                                                class="fa fa-download " aria-hidden="true"></i></a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane p-2  fade bg-info" id="lesson"
+                                    style="box-shadow:2px 4px 10px rgba(0,0,0,0.3); border-radius:8px;">
+                                    <div class="row">
+                                        <h4 class="col-md-5 text-white">Lesson Plan</h4>
+                                        {% for pdf in lesson %}
+                                        <a href="{{ pdf.lesson.url}}" class="ml-auto mr-3 text-white" style="font-size:25px;text-decoration: none;"><i
+                                                class="fa fa-eye " aria-hidden="true"></i></a>
+                                        {% endfor %}
+
+                                        {% for pdf in lesson %}
+                                        <a href="{{ pdf.lesson.url}}" download="{{ pdf.lesson.url}}" class=" mr-4 text-white" style="font-size:25px;text-decoration: none;"><i
+                                                class="fa fa-download" aria-hidden="true"></i></a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ml-auto p-3" style="box-shadow:2px 4px 10px rgba(0,0,0,0.5);">
+                        <h3 class="mb-4 text-info">Chapter Wise Download</h3>
+                        <select id="chapter_id" name="chapter_id" class="form-control">
+                            <option value="">Select Chapter</option>
+                            {% for i in chapterall %}
+                            <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+
+                        </select>
+                        <div class="box-1 mt-4">
+                            <ul class="nav nav-tabs" id="mytab">
+                                <li class="nav-item">
+                                    <a class="nav-link active bg-info text-white" data-toggle="tab"
+                                        href="#solutions">Solutions</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content py-3" id="mytabcontent">
+                                <div class="tab-pane p-2  fade show active bg-info" id="solutions"
+                                    style="box-shadow:2px 4px 10px rgba(0,0,0,0.3);border-radius:8px;">
+                                    <div class="row">
+                                        <h4 class="col-md-5 text-white">Worksheet 1</h4>
+                                        <a href="" class="ml-auto mr-4 text-white" style="font-size:25px;"><i
+                                            class="fa fa-eye ml-auto" aria-hidden="true"></i></a>
+
+<!--                                         {% for pdf in worksheet1 %}-->
+<!--                                        <a href="{{ pdf.worksheet1.url}}" class="ml-auto mr-4 text-white" style="font-size:25px;"><i-->
+<!--                                                class="fa fa-eye ml-auto" aria-hidden="true"></i></a>-->
+<!--                                        {% endfor %}-->
+
+                                            <a href="" class="mr-4 text-white" style="font-size:25px;"><i
+                                                class="fa fa-download ml-auto" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane p-2  fade show active mt-4 bg-info" id="solutions"
+                                    style="box-shadow:2px 4px 10px rgba(0,0,0,0.3);border-radius:8px;">
+                                    <div class="row">
+                                        <h4 class="col-md-5 text-white">Worksheet 2</h4>
+                                        <a href="" class="ml-auto mr-4 text-white" style="font-size:25px;"><i
+                                            class="fa fa-eye ml-auto" aria-hidden="true"></i></a>
+                                            <a href="" class="mr-4 text-white" style="font-size:25px;"><i
+                                                class="fa fa-download ml-auto" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    </div>
+    <section id="img">
+        <h1 class="text-white text-center">E-BOOKS AVAILABLE</h1>
+        <div class="container">
+            <ul>
+                <li><img src="{% static 'aasets/images/books/Cover1.png' %}" style="width:230px;height:277px; border:4px solid white;"
+                        alt=""></li>
+                <li><img src="{% static 'aasets/images/books/Cover2.png' %}" style="width:230px;height:277px; border:4px solid white;"
+                        alt=""></li>
+                <li><img src="{% static 'aasets/images/books/Cover3.png' %}" style="width:230px;height:277px; border:4px solid white;"
+                        alt=""></li>
+                <li><img src="{% static 'aasets/images/books/Cover4.png' %}" style="width:230px;height:277px; border:4px solid white;"
+                        alt=""></li>
+            </ul>
+        </div>
+    </section>
+    <section id="contact" class="bg-light pt-3 pb-3 mt-5">
+        <h4 class="text-center">CONTACT <span class="text-info">INFO</span></h4>
+        <p class="text-center mt-4">Phone : / Fax No : / Email : info@fivefingers.com / support@fivefingers.com</p>
+    </section>
+    <footer class="bg-dark p-3">
+        <div class="container ">
+            <p class="text-white">2016 © Five Fingers Education(P) Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#subject").change(function () {
+      var url = $("#indexForm").attr("data-courses-url");  // get the url of the `load_courses` view
+      var subjectId = $(this).val();  // get the selected programming ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/load-courses/)
+        data: {
+          'subject': subjectId       // add the programming id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_courses` view function
+          $("#bookseries").html(data);  // replace the contents of the course input with the data that came from the server
+        }
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>

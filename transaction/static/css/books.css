@@ -1,0 +1,32 @@
+#books-list{
+    margin-top:40px;
+   padding-bottom:30px;
+}
+#books-list h1{
+    font-size:50px;
+    font-weight:bold;
+}
+.books a{
+    margin-top:20px;
+    box-shadow:4px 4px 8px rgba(0,0,0,0.5);
+}
+.main
+{
+    margin-right:100px;
+    margin-top:30px;
+}
+.row1{
+    margin-left:380px;
+}
+.row2-a{
+    margin-left:190px;
+}
+.row3-a{
+    margin-left:170px;
+}
+.row3-b{
+    margin-left:80px;
+}
+.row4-a{
+    margin-left:280px;
+}

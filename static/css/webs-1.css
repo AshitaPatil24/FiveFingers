@@ -1,0 +1,211 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    text-decoration:none;
+    list-style:none;
+}
+body{
+    font-family:sans-serif;
+}
+nav{
+    position:sticky;
+    top:0;
+    left:15px;
+    background:darkcyan;
+    height:70px;
+    width:100%;
+    z-index:999;
+}
+nav .logo{
+    font-size:35px;
+    color:#fff;
+    line-height:70px;
+    margin:0 100px;
+}
+nav ul{
+    float:right;
+    margin-right:20px;
+}
+nav ul li{
+    display:inline-block;
+    line-height:70px;
+    margin:0 20px;
+}
+nav ul li a{
+    color:#fff;
+    font-size:15px;
+    text-transform: uppercase;
+    padding:7px 13px;
+    border-radius:3px; 
+    transition:.3s ease;
+}
+nav ul li a.active,
+nav ul li a:hover{
+    background:#00ced1;
+    color:white;
+    text-decoration: none;
+}
+.checkbtn{
+    color:#fff;
+    font-size:26px;
+    float:right;
+    margin-top:22px;
+    margin-right:30px;
+    display:none;
+}
+#check{
+    display:none;
+}
+
+@media (max-width:1400px)
+{
+    label.logo{
+        font-size:20px;
+        /* padding:15px; */
+    }
+    nav ul li a{
+        font-size:13px;
+    }
+}
+@media (max-width:600px)
+{
+    label.logo{
+        display:none;
+    }
+}
+
+@media (max-width:1400px)
+{
+    .checkbtn{
+        display:block;
+    }
+    nav ul{
+        position:fixed;
+        z-index:1000;
+        background:#2c3e50;
+        width:100%;
+        height:100vh;
+        top:70px;
+        left:-100%;
+        text-align:center;
+        transition:.3s ease;
+       
+    }
+    nav ul li{
+        display:block;
+    }
+    nav ul li a{
+        font-size:20px;
+    }
+    nav ul li a:hover,
+    nav ul li a.active{
+        background-color:darkcyan;
+        color:white;
+    }
+    #check:checked~ul{
+        left:0;
+    }
+}
+
+@media (max-width:400px)
+{
+    nav ul{
+        width:100%;
+    }
+}
+/*******************************************************************************************************/
+#about-section{
+    margin-top:100px;
+}
+#about-section h2{
+    margin-top:20px;
+    font-size:38px;
+    font-weight:bold;
+}
+/*******************************************************************************************************/
+.services-offers{
+    margin-top:90px;
+}
+.services-offers h1{
+    margin-bottom:60px;
+}
+.services-offers ul li{
+    display:inline-block;
+    height:200px;
+}
+.services-offers ul li a{
+    text-decoration:none;
+    text-align: center;
+    position:absolute;
+    top:80px;
+    left:170px;
+}
+@media(max-width:1000px)
+{
+    .services-offers{
+        width:90%;
+    }
+    .services-offers ul{
+        margin-left:20px;
+    }
+    .services-offers ul li a{
+        left:70px;
+    }
+}
+
+/*****************************************************************************************************/
+#authors{
+    margin-top:100px;
+    padding-bottom:40px;
+}
+#authors h1{
+    margin-bottom:80px;
+}
+/***********************************************************************************************/
+/*
+#img{
+    margin-top:40px;
+    padding-top:40px;
+    width:100%;
+    height:450px;
+    background-color:black;
+}
+#img ul{
+    margin-top:30px;
+    margin-left:35px;
+}
+#img ul li{
+    display:inline-block;
+    padding-right:30px;
+}
+*/
+/***********************************************************************************************/
+
+.reviews{
+    min-height:400px;
+    width:100%;
+}
+.reviews h1{
+    padding-top:60px;
+}
+
+/**********************************************************************************************/
+#contact{
+    margin-top:40px;
+    padding-bottom:30px;
+}
+#contact p{
+    color:grey;
+    font-size:20px;
+    font-weight:bold;
+}
+/*********************************************************************************************************/
+footer{
+    padding:15px;
+}
+footer p{
+    margin-top:15px;
+    font-size:18px;
+    color:white;
+}
