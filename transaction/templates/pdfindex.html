@@ -67,6 +67,7 @@
 
        <div class="container">
            <div class="wrapper">
+               <h2 style="font-family:sans-serif font-weight:bold">View Book</h2>
              <form method="post" id="indexForm" onsubmit="return Validate(this);" data-courses-url="{% url 'ajax_load_courses' %}" enctype="multipart/form-data">
          {% csrf_token %}
                  <div style="width:300px">

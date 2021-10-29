@@ -264,18 +264,35 @@
                         <label>Enter Captcha:</label>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" readonly id="capt">
-                            </div><br>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="textinput">
+                                <td>
+                            <a href="#" onclick="return ReloadCaptchaImage('CaptchaImage');"><span style="font-size:12px;">reload image</span></a><br>
+                            <a href="https://www.SnapHost.com/captcha/ProCaptchaOverview.aspx"><img id="CaptchaImage" alt="Web Form Code" style="border-width:0px;" src="https://www.SnapHost.com/captcha/CaptchaImage.aspx?id=DEMO12345678"></a>
+                            <script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script type="text/javascript">
+                                function ReloadCaptchaImage(captchaImageId) {
+                                    var obj = document.getElementById(captchaImageId);
+                                    var src = '' + obj.src;
+                                    obj.src = '';
+                                    var date = new Date();
+                                    var pos = src.indexOf('&rad=');
+                                    if (pos >= 0) { src = src.substr(0, pos); }
+                                    obj.src = src + '&rad=' + date.getTime();
+                                    return false;
+                                }
+                            </script>
+                            </td>
+<!--                                <input type="text" class="form-control" readonly id="capt">-->
+<!--                            </div><br>-->
+<!--                            <div class="form-group col-md-6">-->
+                                <input type="text" class="form-control" id="textinput"><br>
+                                <button type="submit" value="Sign Up" id="click" class="btn btn-primary" onclick="validcap()">Sign Up</button>
                             </div>
-                        </div><br>
+<!--                        </div><br>-->
 
 
 
-                    <h6>Captcha not visible <img src="{% static 'aasets/images/refresh.jpeg' %}" width="40px" onclick="cap()">
-                    </h6>
-                    <button type="submit" value="Sign Up" id="click" class="btn btn-primary" onclick="validcap()">Sign Up</button>
+<!--                    <h6>Captcha not visible <img src="{% static 'aasets/images/refresh.jpeg' %}" width="40px" onclick="cap()">-->
+<!--                    </h6>-->
+<!--                    <button type="submit" value="Sign Up" id="click" class="btn btn-primary" onclick="validcap()">Sign Up</button>-->
                     </form>
                 </div>
             </div>
@@ -388,33 +405,34 @@
         </div>
     </footer>
 
-    <script type="text/javascript">
-        function cap() {
-            var alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'
-                , 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-                'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$', '%', '^', '&', '*', '+'];
-            var a = alpha[Math.floor(Math.random() * 71)];
-            var b = alpha[Math.floor(Math.random() * 71)];
-            var c = alpha[Math.floor(Math.random() * 71)];
-            var d = alpha[Math.floor(Math.random() * 71)];
-            var e = alpha[Math.floor(Math.random() * 71)];
-            var f = alpha[Math.floor(Math.random() * 71)];
 
-            var final = a + b + c + d + e + f;
-            document.getElementById("capt").value = final;
-        }
-        function validcap() {
-            var stg1 = document.getElementById('capt').value;
-            var stg2 = document.getElementById('textinput').value;
-            if (stg1 == stg2) {
-                alert("Form is validated Succesfully");
-                return true;
-            } else {
-                alert("Please enter a valid captcha");
-                return false;
-            }
-        }
-    </script>
+<!--    <script type="text/javascript">-->
+<!--        function cap() {-->
+<!--            var alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'-->
+<!--                , 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',-->
+<!--                'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$', '%', '^', '&', '*', '+'];-->
+<!--            var a = alpha[Math.floor(Math.random() * 71)];-->
+<!--            var b = alpha[Math.floor(Math.random() * 71)];-->
+<!--            var c = alpha[Math.floor(Math.random() * 71)];-->
+<!--            var d = alpha[Math.floor(Math.random() * 71)];-->
+<!--            var e = alpha[Math.floor(Math.random() * 71)];-->
+<!--            var f = alpha[Math.floor(Math.random() * 71)];-->
+
+<!--            var final = a + b + c + d + e + f;-->
+<!--            document.getElementById("capt").value = final;-->
+<!--        }-->
+<!--        function validcap() {-->
+<!--            var stg1 = document.getElementById('capt').value;-->
+<!--            var stg2 = document.getElementById('textinput').value;-->
+<!--            if (stg1 == stg2) {-->
+<!--                alert("Form is validated Succesfully");-->
+<!--                return true;-->
+<!--            } else {-->
+<!--                alert("Please enter a valid captcha");-->
+<!--                return false;-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
 </body>
 
 </html>
