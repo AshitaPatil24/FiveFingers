@@ -292,8 +292,6 @@ def solutionaddnew(request):
     else:
         form = solutionform()
         return render(request,'solutionindex.html',{'form':form,'error': " "})
-    print("ashita")
-
 
 
 @login_required(login_url=webindex)
