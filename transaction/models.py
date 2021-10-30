@@ -23,8 +23,8 @@ class tblwebregistration(models.Model):
         db_table = 'tblwebregistration'
         verbose_name = 'Websupport Registration'
 
-    def __str__(self):
-        return self.user
+    # def __str__(self):
+    #     return self.user
 
 
 class tblviewbook(models.Model):

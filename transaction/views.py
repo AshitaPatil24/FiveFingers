@@ -225,6 +225,9 @@ def pdfindex(request):
 
 @login_required(login_url=webindex)
 def pdfupdate(request, id,subject,bookseries,classid):
+    subject = subject.replace("%20", " ")
+    bookseries = bookseries.replace("%20", " ")
+    classid = classid.replace("%20", " ")
     employee = tblviewbook.objects.get(id=id)
     path="media_cdn/viewbook"
     print(employee.viewbook.path)
@@ -302,6 +305,9 @@ def solutionindex(request):
 
 @login_required(login_url=webindex)
 def solutionupdate(request, id,subject,bookseries,classid):
+    subject = subject.replace("%20", " ")
+    bookseries = bookseries.replace("%20", " ")
+    classid = classid.replace("%20", " ")
     employee = tblsolution.objects.get(id=id)
     path="media_cdn/viewbook"
     print(employee.solution.path)
@@ -384,6 +390,9 @@ def lessonindex(request):
 
 @login_required(login_url=webindex)
 def lessonupdate(request, id,subject,bookseries,classid):
+    subject=subject.replace("%20"," ")
+    bookseries=bookseries.replace("%20"," ")
+    classid=classid.replace("%20"," ")
     employee = tbllesson.objects.get(id=id)
     path="media_cdn/lesson"
     print(employee.lesson.path)
@@ -468,6 +477,10 @@ def worksheetindex(request):
 
 @login_required(login_url=webindex)
 def worksheetupdate(request, id,subject,bookseries,classid,chapter):
+    subject = subject.replace("%20", " ")
+    bookseries = bookseries.replace("%20", " ")
+    classid = classid.replace("%20", " ")
+    chapter = chapter.replace("%20", " ")
     employee = tblworksheet.objects.get(id=id)
     path="media_cdn/worksheet1"
     path="media_cdn/worksheet2"

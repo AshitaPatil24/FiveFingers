@@ -121,6 +121,7 @@ def bookseriesindex(request):
 
 @login_required(login_url=webindex)
 def bookseriesupdate(request, id,subject):
+    subject = subject.replace("%20", " ")
     employee = tblbookseries.objects.get(id=id)
     print(subject)
     form = bookseriesupdateform(request.POST, instance = employee)
@@ -249,6 +250,9 @@ def chapterindex(request):
 
 @login_required(login_url=webindex)
 def chapterupdate(request, id,subject,bookseries,classid):
+    subject = subject.replace("%20", " ")
+    bookseries = bookseries.replace("%20", " ")
+    classid = classid.replace("%20", " ")
     employee = tblchapter.objects.get(id=id)
     print(subject)
     form = chapterupdateform(request.POST, instance = employee)
