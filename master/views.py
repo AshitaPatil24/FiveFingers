@@ -276,4 +276,3 @@ def chapterdestroy(request, id):
     employee.delete()
     return HttpResponse("Deleted")
 
-print("Sakshi")
